@@ -1,16 +1,16 @@
 export async function sendSMS(to: string[], message: string) {
-    const apiKey = process.env.SMSLEOPARD_API_KEY || '';
-    const apiSecret = process.env.SMSLEOPARD_API_SECRET || '';
-    const senderId = process.env.SMSLEOPARD_SENDER_ID || 'SMSLeopard';
+    const accessToken = process.env.SMS_LEOPARD_ACCESS_TOKEN;
+    const senderId = process.env.SMSLEOPARD_SENDER_ID || 'SMS_TEST';
 
-    if (!apiKey || !apiSecret) {
+    if (!accessToken) {
         console.log('SMS Leopard credentials missing. Mocking SMS to:', to, 'Message:', message);
         return;
     }
 
     try {
         const destination = to.map(number => ({ number }));
-        const credentials = btoa(`${apiKey}:${apiSecret}`);
+        // The token is already base64 encoded (key:secret)
+        const credentials = accessToken;
 
         const response = await fetch('https://api.smsleopard.com/v1/sms/send', {
             method: 'POST',
