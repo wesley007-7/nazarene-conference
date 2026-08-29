@@ -10,7 +10,7 @@ export async function sendSMS(to: string[], message: string) {
 
     try {
         const destination = to.map(number => ({ number }));
-        const credentials = Buffer.from(`${apiKey}:${apiSecret}`).toString('base64');
+        const credentials = btoa(`${apiKey}:${apiSecret}`);
 
         const response = await fetch('https://api.smsleopard.com/v1/sms/send', {
             method: 'POST',
