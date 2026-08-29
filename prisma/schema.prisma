@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Registrant {
+  id               String   @id @default(uuid())
+  fullName         String
+  district         String
+  localChurch      String
+  phoneNumber      String
+  registrationType String   // "Full Board" or "Day Scholar"
+  status           String   @default("PENDING") // "PENDING", "APPROVED"
+  balanceAmount    Int      @default(0)
+  tShirtSize       String
+  extraTShirt      Boolean  @default(false)
+  extraTShirtSize  String?
+  payments         Payment[]
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Payment {
+  id            String     @id @default(uuid())
+  amount        Int
+  purpose       String     // "confirmation" or "balance"
+  status        String     // "pending", "success", "failed"
+  reference     String     @unique
+  registrantId  String
+  registrant    Registrant @relation(fields: [registrantId], references: [id])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Settings {
+  id             Int      @id @default(1)
+  treasurerPhone String?
+  secretaryPhone String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
