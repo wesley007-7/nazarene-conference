@@ -1,5 +1,3 @@
-import { prisma } from './prisma';
-
 export async function sendSMS(to: string[], message: string) {
     const apiKey = process.env.SMSLEOPARD_API_KEY || '';
     const apiSecret = process.env.SMSLEOPARD_API_SECRET || '';

@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function SettingsForm({ initialData }: { initialData: any }) {
   const [treasurerPhone, setTreasurerPhone] = useState(initialData?.treasurerPhone || '');
   const [secretaryPhone, setSecretaryPhone] = useState(initialData?.secretaryPhone || '');
@@ -20,7 +21,7 @@ export default function SettingsForm({ initialData }: { initialData: any }) {
       } else {
         setStatus('Error saving settings');
       }
-    } catch (e) {
+    } catch {
       setStatus('Error saving settings');
     }
   }

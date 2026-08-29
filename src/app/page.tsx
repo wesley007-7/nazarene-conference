@@ -118,7 +118,7 @@ export default function Home() {
                 Conference Registration
               </h1>
               <p className="text-lg text-zinc-300 leading-relaxed animate-fade-in-up delay-300">
-                Secure your place for the Church of the Nazarene Men's Conference.
+                Secure your place for the Church of the Nazarene Men&apos;s Conference.
                 Complete your details and finalize your payment via M-PESA.
               </p>
             </div>

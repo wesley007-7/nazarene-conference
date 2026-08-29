@@ -7,6 +7,7 @@ export default function PortalPage() {
   const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [registrant, setRegistrant] = useState<any>(null);
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -24,7 +25,7 @@ export default function PortalPage() {
       } else {
         setError(data.message || 'Error finding registration.');
       }
-    } catch (err) {
+    } catch {
       setError('A network error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -124,7 +125,7 @@ export default function PortalPage() {
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
                   </div>
-                  <h4 className="font-bold text-xl mb-2">You're Fully Paid!</h4>
+                  <h4 className="font-bold text-xl mb-2">You&apos;re Fully Paid!</h4>
                   <p className="text-sm">Thank you! Your registration is complete and fully paid. We look forward to seeing you at the conference.</p>
                 </div>
               )}

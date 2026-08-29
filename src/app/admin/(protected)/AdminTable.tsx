@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function AdminTable({ initialRegistrants }: { initialRegistrants: any[] }) {
   const [filter, setFilter] = useState("ALL");
   const [loadingId, setLoadingId] = useState<string | null>(null);
