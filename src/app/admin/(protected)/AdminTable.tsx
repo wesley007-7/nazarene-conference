@@ -48,6 +48,31 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
     }
   };
 
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to completely delete this registration? This action cannot be undone.")) return;
+    
+    setLoadingId(id);
+    try {
+      const res = await fetch('/api/admin/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      });
+      
+      if (res.ok) {
+        router.refresh();
+      } else {
+        const errorData = await res.json();
+        alert(errorData.error || "Failed to delete.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while deleting.");
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
   const filteredRegistrants = initialRegistrants.filter(r => 
     filter === "ALL" ? true : r.status === filter
   );
@@ -119,7 +144,7 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                     <button
                       onClick={() => handleApprove(r.id, 'confirmation')}
                       disabled={loadingId === r.id}
-                      className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50"
+                      className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50 mr-2"
                     >
                       {loadingId === r.id ? "Approving..." : "Approve 500 KSh"}
                     </button>
@@ -128,11 +153,18 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                     <button
                       onClick={() => handleApprove(r.id, 'installment')}
                       disabled={loadingId === r.id}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50 mr-2"
                     >
                       {loadingId === r.id ? "Recording..." : "Record Payment"}
                     </button>
                   )}
+                  <button
+                    onClick={() => handleDelete(r.id)}
+                    disabled={loadingId === r.id}
+                    className="bg-red-50 text-red-600 hover:bg-red-100 font-bold py-2 px-3 rounded shadow-sm border border-red-200 transition-colors disabled:opacity-50"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
