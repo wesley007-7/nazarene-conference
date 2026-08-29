@@ -24,7 +24,7 @@ const schema = z.object({
   phone: z.string().regex(/^(?:254|\+254|0)?(7[0-9]{8}|1[0-9]{8})$/, "Invalid Kenyan phone number"),
   registrationType: z.enum(["Full Board", "Day Scholar"]),
   freeTshirtSize: z.enum(["S", "M", "L", "XL", "XXL"]),
-  extraTshirtQuantity: z.coerce.number().min(0).max(20)
+  extraTshirtQuantity: z.number().min(0).max(20)
 });
 
 type FormData = z.infer<typeof schema>
@@ -35,7 +35,7 @@ export default function Home() {
   const [formData, setFormData] = useState<FormData | null>(null)
   const router = useRouter()
   
-  const { register, handleSubmit, watch, formState: { errors }, trigger } = useForm<FormData>({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       extraTshirtQuantity: 0,
@@ -43,7 +43,6 @@ export default function Home() {
     }
   })
 
-  const watchExtraTshirtQuantity = watch("extraTshirtQuantity", 0)
   const watchRegType = watch("registrationType", "Full Board")
 
   const totalAmount = watchRegType === 'Full Board' ? 5850 : 3100;
@@ -228,7 +227,7 @@ export default function Home() {
 
                       <label className="flex flex-col gap-2 font-medium text-sm text-zinc-700 group">
                         <span className="transition-colors group-focus-within:text-zinc-900">Extra T-Shirts (KSh 700 each, paid on site)</span>
-                        <input type="number" min="0" max="20" {...register("extraTshirtQuantity")} className="p-3 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-zinc-800 focus:border-zinc-800 outline-none transition-all duration-300 bg-zinc-50 focus:bg-white" />
+                        <input type="number" min="0" max="20" {...register("extraTshirtQuantity", { valueAsNumber: true })} className="p-3 border border-zinc-300 rounded-xl focus:ring-2 focus:ring-zinc-800 focus:border-zinc-800 outline-none transition-all duration-300 bg-zinc-50 focus:bg-white" />
                       </label>
                     </div>
                   </div>
