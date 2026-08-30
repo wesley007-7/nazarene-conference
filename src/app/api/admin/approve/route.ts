@@ -52,9 +52,11 @@ export async function POST(req: Request) {
 
     const treasurerPhone = process.env.TREASURER_PHONE || '0721441269';
     const secondAdminPhone = process.env.SECOND_ADMIN_PHONE;
+    const thirdAdminPhone = process.env.THIRD_ADMIN_PHONE;
 
     const adminPhones = [treasurerPhone];
     if (secondAdminPhone) adminPhones.push(secondAdminPhone);
+    if (thirdAdminPhone) adminPhones.push(thirdAdminPhone);
 
     // Send to attendee
     await sendSMS([registrant.phoneNumber], attendeeMsg);
