@@ -120,34 +120,36 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
 
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="px-6 py-4 border-b flex justify-between items-center bg-gray-50">
+      <div className="px-6 py-4 border-b flex flex-col md:flex-row md:justify-between items-start md:items-center bg-gray-50 gap-4">
         <h2 className="text-lg font-medium text-gray-900">Registrants</h2>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           <select 
             value={filter} 
             onChange={(e) => setFilter(e.target.value)}
-            className="border-gray-300 rounded-md text-sm shadow-sm p-2 bg-white"
+            className="border-gray-300 rounded-md text-sm shadow-sm p-2 bg-white flex-1 md:flex-none min-w-[140px]"
           >
             <option value="ALL">All Statuses</option>
             <option value="PENDING">Pending Confirmation</option>
             <option value="CONFIRMED">Confirmed (Balance Pending)</option>
             <option value="FULLY_PAID">Fully Paid</option>
           </select>
-          <button 
-            onClick={() => setIsAddModalOpen(true)}
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-colors"
-          >
-            Add Registrant
-          </button>
-          <a 
-            href="/api/admin/export" 
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 shadow-sm transition-colors"
-          >
-            Export to CSV
-          </a>
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            <button 
+              onClick={() => setIsAddModalOpen(true)}
+              className="flex-1 md:flex-none justify-center inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-sm transition-colors"
+            >
+              Add Registrant
+            </button>
+            <a 
+              href="/api/admin/export" 
+              className="flex-1 md:flex-none justify-center inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 shadow-sm transition-colors"
+            >
+              Export to CSV
+            </a>
+          </div>
         </div>
       </div>
-      <div className="overflow-x-auto">
+      <div className="hidden md:block overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
@@ -187,36 +189,101 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {r.status === 'PENDING' && (
+                  <div className="flex gap-2">
+                    {r.status === 'PENDING' && (
+                      <button
+                        onClick={() => handleApprove(r.id, 'confirmation')}
+                        disabled={loadingId === r.id}
+                        className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50"
+                      >
+                        {loadingId === r.id ? "Approving..." : "Approve 500 KSh"}
+                      </button>
+                    )}
+                    {r.status === 'CONFIRMED' && (
+                      <button
+                        onClick={() => handleApprove(r.id, 'installment')}
+                        disabled={loadingId === r.id}
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50"
+                      >
+                        {loadingId === r.id ? "Recording..." : "Record Payment"}
+                      </button>
+                    )}
                     <button
-                      onClick={() => handleApprove(r.id, 'confirmation')}
+                      onClick={() => handleDelete(r.id)}
                       disabled={loadingId === r.id}
-                      className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50 mr-2"
+                      className="bg-red-50 text-red-600 hover:bg-red-100 font-bold py-2 px-3 rounded shadow-sm border border-red-200 transition-colors disabled:opacity-50"
                     >
-                      {loadingId === r.id ? "Approving..." : "Approve 500 KSh"}
+                      Delete
                     </button>
-                  )}
-                  {r.status === 'CONFIRMED' && (
-                    <button
-                      onClick={() => handleApprove(r.id, 'installment')}
-                      disabled={loadingId === r.id}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50 mr-2"
-                    >
-                      {loadingId === r.id ? "Recording..." : "Record Payment"}
-                    </button>
-                  )}
-                  <button
-                    onClick={() => handleDelete(r.id)}
-                    disabled={loadingId === r.id}
-                    className="bg-red-50 text-red-600 hover:bg-red-100 font-bold py-2 px-3 rounded shadow-sm border border-red-200 transition-colors disabled:opacity-50"
-                  >
-                    Delete
-                  </button>
+                  </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Card Layout */}
+      <div className="md:hidden flex flex-col divide-y divide-gray-200">
+        {filteredRegistrants.length === 0 ? (
+          <div className="px-6 py-10 text-center text-sm text-gray-500">
+            No registrants found.
+          </div>
+        ) : filteredRegistrants.map(r => (
+          <div key={r.id} className="p-4 bg-white hover:bg-gray-50 space-y-3">
+            <div className="flex justify-between items-start">
+              <div>
+                <div className="text-sm font-bold text-gray-900">{r.fullName}</div>
+                <div className="text-sm text-gray-500">{r.phoneNumber}</div>
+              </div>
+              <span className={`px-2 py-1 text-[10px] uppercase leading-5 font-bold rounded-full 
+                ${r.status === 'FULLY_PAID' ? 'bg-green-100 text-green-800' : 
+                  r.status === 'CONFIRMED' ? 'bg-blue-100 text-blue-800' : 
+                  'bg-yellow-100 text-yellow-800'}`}>
+                {r.status.replace('_', ' ')}
+              </span>
+            </div>
+            
+            <div className="flex justify-between items-center text-sm">
+              <div className="text-gray-600">
+                <span className="font-semibold text-gray-900">{r.registrationType}</span><br/>
+                <span className="text-xs">{r.district} - {r.localChurch}</span>
+              </div>
+              <div className="text-right">
+                <span className="text-xs text-gray-500 uppercase">Balance Due</span><br/>
+                <span className="font-bold text-gray-900">KSh {r.balanceAmount.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-gray-100 flex flex-wrap gap-2">
+              {r.status === 'PENDING' && (
+                <button
+                  onClick={() => handleApprove(r.id, 'confirmation')}
+                  disabled={loadingId === r.id}
+                  className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-3 rounded shadow transition-colors disabled:opacity-50 text-sm"
+                >
+                  {loadingId === r.id ? "Approving..." : "Approve 500 KSh"}
+                </button>
+              )}
+              {r.status === 'CONFIRMED' && (
+                <button
+                  onClick={() => handleApprove(r.id, 'installment')}
+                  disabled={loadingId === r.id}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded shadow transition-colors disabled:opacity-50 text-sm"
+                >
+                  {loadingId === r.id ? "Recording..." : "Record Payment"}
+                </button>
+              )}
+              <button
+                onClick={() => handleDelete(r.id)}
+                disabled={loadingId === r.id}
+                className="bg-red-50 text-red-600 hover:bg-red-100 font-bold py-2 px-3 rounded shadow-sm border border-red-200 transition-colors disabled:opacity-50 text-sm"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
 
       {isAddModalOpen && (
