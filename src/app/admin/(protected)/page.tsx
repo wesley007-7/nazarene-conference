@@ -14,9 +14,10 @@ export default async function AdminDashboard() {
   
   const totalCollected = registrants.reduce((sum, r) => {
     if (r.status === 'PENDING') return sum; // Not officially paid yet
-    const originalTotal = r.registrationType === 'Full Board' ? 5850 : 3100;
+    const originalTotal = r.registrationType === 'Full Board' ? 5350 : 2600;
     const amountPaidSoFar = originalTotal - r.balanceAmount;
-    return sum + amountPaidSoFar;
+    // Every confirmed/fully paid user paid the standalone 500 KES confirmation fee
+    return sum + amountPaidSoFar + 500;
   }, 0);
 
   return (

@@ -45,7 +45,7 @@ export default function Home() {
 
   const watchRegType = watch("registrationType", "Full Board")
 
-  const totalAmount = watchRegType === 'Full Board' ? 5850 : 3100;
+  const totalAmount = watchRegType === 'Full Board' ? 5350 : 2600;
 
   const onProceedToPayment = async (data: FormData) => {
     setFormData(data);
@@ -128,11 +128,11 @@ export default function Home() {
               <ul className="space-y-4">
                 <li className="flex justify-between border-b border-white/5 pb-3 text-zinc-300">
                   <span>Full Board</span>
-                  <strong className="text-white">KSh 5,850</strong>
+                  <strong className="text-white">KSh 5,350</strong>
                 </li>
                 <li className="flex justify-between border-b border-white/5 pb-3 text-zinc-300">
                   <span>Day Scholar</span>
-                  <strong className="text-white">KSh 3,100</strong>
+                  <strong className="text-white">KSh 2,600</strong>
                 </li>
                 <li className="pt-2">
                   <div className="flex justify-between text-zinc-200 font-bold mb-1">
@@ -140,7 +140,7 @@ export default function Home() {
                     <strong className="text-white text-lg">KSh 500</strong>
                   </div>
                   <p className="text-xs text-zinc-400 leading-relaxed">
-                    * The KSh 500 confirmation fee is required today to secure your spot. This amount is automatically deducted from your total package cost above.
+                    * The KSh 500 confirmation fee is a standalone payment required today to secure your spot. This amount is <strong>NOT</strong> deducted from your package cost above.
                   </p>
                 </li>
               </ul>
@@ -196,14 +196,14 @@ export default function Home() {
                         <input type="radio" value="Full Board" {...register("registrationType")} className="mt-1 accent-zinc-900 w-5 h-5 cursor-pointer transition-transform" />
                         <span className="flex flex-col">
                           <strong className="text-lg text-zinc-900">Full Board</strong>
-                          <small className="text-zinc-500 mt-1 font-medium">KSh 5,850</small>
+                          <small className="text-zinc-500 mt-1 font-medium">KSh 5,350</small>
                         </span>
                       </label>
                       <label className={`border-2 p-5 rounded-2xl cursor-pointer flex items-start gap-4 transition-all duration-300 ${watchRegType === 'Day Scholar' ? 'border-zinc-900 bg-zinc-50 shadow-md transform scale-[1.02]' : 'border-zinc-200 hover:border-zinc-300 bg-white hover:bg-zinc-50/50'}`}>
                         <input type="radio" value="Day Scholar" {...register("registrationType")} className="mt-1 accent-zinc-900 w-5 h-5 cursor-pointer transition-transform" />
                         <span className="flex flex-col">
                           <strong className="text-lg text-zinc-900">Day Scholar</strong>
-                          <small className="text-zinc-500 mt-1 font-medium">KSh 3,100</small>
+                          <small className="text-zinc-500 mt-1 font-medium">KSh 2,600</small>
                         </span>
                       </label>
                     </div>
@@ -242,9 +242,9 @@ export default function Home() {
                 <div className="animate-fade-in-up">
                   <div className="bg-green-50 border border-green-200 rounded-2xl p-6 md:p-10 text-center">
                     <h3 className="text-2xl font-bold text-green-900 mb-2">Confirmation Required</h3>
-                    <p className="text-green-800 mb-2 text-lg">Total Package: <strong>KSh {totalAmount.toLocaleString()}</strong></p>
+                    <p className="text-green-800 mb-2 text-lg">Package Price: <strong>KSh {totalAmount.toLocaleString()}</strong></p>
                     <p className="text-green-800 mb-2 text-lg">Confirmation Fee Due Now: <strong className="text-xl">KSh 500</strong></p>
-                    <p className="text-green-700 mb-8 text-sm">Balance of KSh {(totalAmount - 500).toLocaleString()} to be paid later.</p>
+                    <p className="text-green-700 mb-8 text-sm">Balance of KSh {totalAmount.toLocaleString()} to be paid later.</p>
                     
                     <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 text-left max-w-lg mx-auto mb-8">
                       <h4 className="font-bold text-zinc-900 mb-4 flex items-center gap-2">

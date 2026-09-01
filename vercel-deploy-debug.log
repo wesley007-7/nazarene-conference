@@ -1,0 +1,121 @@
+Vercel CLI 59.10.0 (Node.js 24.19.0)
+> [debug] [2026-08-29T09:17:11.195Z] Agent/TTY/nonInteractive: isAgent=true agentName=github_copilot_vscode_agent stdin.isTTY=true --non-interactive=false explicitFalse=false => nonInteractive=false
+> [debug] [2026-08-29T09:17:11.196Z] user supplied a possible target for deployment or an extension
+> [debug] [2026-08-29T09:17:11.252Z] failed to find extension command with name "vercel---prod"
+> [debug] [2026-08-29T09:17:11.298Z] Setting target to production
+> [debug] [2026-08-29T09:17:11.516Z] Spinner invoked (Deploying conference-registration) with a 0ms delay
+> [debug] [2026-08-29T09:17:11.518Z] Valid access token, skipping token refresh.
+[client-debug] 2026-08-29T09:17:11.518Z Creating deployment...
+[client-debug] 2026-08-29T09:17:11.518Z Provided 'path' is a directory.
+> [debug] [2026-08-29T09:17:11.542Z] #1 → GET https://api.vercel.com/v9/projects/prj_eP70WOYup66OJN7Jsg8Ft8pnPutT?teamId=team_d5ajV5G5JfSz9u8IkbJdG1M3
+[client-debug] 2026-08-29T09:17:11.543Z Found 26 rules in .vercelignore
+[client-debug] 2026-08-29T09:17:11.543Z Building file tree...
+[client-debug] 2026-08-29T09:17:11.554Z Found 60 files in the specified directory
+[client-debug] 2026-08-29T09:17:11.562Z Yielding a 'hashes-calculated' event with 57 hashes
+[client-debug] 2026-08-29T09:17:11.562Z Using provided API URL: https://api.vercel.com
+[client-debug] 2026-08-29T09:17:11.562Z Using provided user agent: vercel 59.10.0 node-v24.19.0 win32 (x64)
+[client-debug] 2026-08-29T09:17:11.562Z Setting platform version to harcoded value 2
+[client-debug] 2026-08-29T09:17:11.562Z Creating the deployment and starting upload...
+[client-debug] 2026-08-29T09:17:11.563Z Determining necessary files for upload...
+[client-debug] 2026-08-29T09:17:11.563Z Creating deployment
+[client-debug] 2026-08-29T09:17:11.564Z Sending deployment creation API request
+> [debug] [2026-08-29T09:17:12.534Z] #1 ← 200 OK: sfo1::r8shb-1787995031454-c2125b13e874 [992ms]
+[client-debug] 2026-08-29T09:17:12.600Z Deployment response: {"error":{"code":"missing_files","message":"Missing files","missing":["39592d3ea9dec11a279c917e98688aa784d20007"]}}
+[client-debug] 2026-08-29T09:17:12.600Z Error: Deployment request status is 400
+[client-debug] 2026-08-29T09:17:12.600Z 1 files are required to upload
+[client-debug] 2026-08-29T09:17:12.600Z Yielding a 'file-count' event
+> [debug] [2026-08-29T09:17:12.600Z] Total files 57, 1 changed
+> [debug] [2026-08-29T09:17:12.601Z] Spinner invoked (Uploading [--------------------] (0.0B/1.2KB)) with a 0ms delay
+[client-debug] 2026-08-29T09:17:12.601Z Building an upload list...
+[client-debug] 2026-08-29T09:17:12.602Z Starting upload
+[client-debug] 2026-08-29T09:17:12.603Z POST https://api.vercel.com/v2/files?teamId=team_d5ajV5G5JfSz9u8IkbJdG1M3
+> [debug] [2026-08-29T09:17:12.604Z] Spinner invoked (Uploading [====================] (1.2KB/1.2KB)) with a 0ms delay
+[client-debug] 2026-08-29T09:17:13.066Z DONE in 463ms: POST https://api.vercel.com/v2/files?teamId=team_d5ajV5G5JfSz9u8IkbJdG1M3
+[client-debug] 2026-08-29T09:17:13.066Z File 39592d3ea9dec11a279c917e98688aa784d20007 (C:\Users\wotie\.gemini\antigravity\scratch\nazarene-conference\vercel-deploy-debug.log) uploaded
+[client-debug] 2026-08-29T09:17:13.066Z Yielding a 'file-uploaded' event
+> [debug] [2026-08-29T09:17:13.067Z] Uploaded: C:\Users\wotie\.gemini\antigravity\scratch\nazarene-conference\vercel-deploy-debug.log (1.16KB)
+[client-debug] 2026-08-29T09:17:13.067Z All files uploaded
+[client-debug] 2026-08-29T09:17:13.067Z Yielding a 'all-files-uploaded' event
+[client-debug] 2026-08-29T09:17:13.067Z Starting deployment creation
+[client-debug] 2026-08-29T09:17:13.068Z Creating deployment
+[client-debug] 2026-08-29T09:17:13.069Z Sending deployment creation API request
+[client-debug] 2026-08-29T09:17:14.095Z Deployment response: {"alias":["conference-registration-wesley-otienos-projects.vercel.app"],"aliasAssigned":false,"automaticAliases":["conference-registration-wesley-otienos-projects.vercel.app"],"bootedAt":1787995032775,"buildingAt":1787995032775,"buildSkipped":false,"createdAt":1787995032775,"creator":{"uid":"9yA0qOxgC3bzAdcdVVE625yR","username":"wotieno896-2717"},"id":"dpl_EazrediwcP3pVy1oCpFGvor6wQmG","name":"conference-registration","meta":{"gitCommitAuthorName":"AI Bot","gitCommitAuthorEmail":"bot@example.com","gitCommitMessage":"Remove obsolete africastalking dependency and fix btoa","gitCommitRef":"master","gitCommitSha":"b5e22994ccbcd15812a570b26a291118fc374827","gitDirty":"1","gitRootDirectory":"","actor":"github_copilot_vscode_agent"},"originCacheRegion":"iad1","project":{"id":"prj_eP70WOYup66OJN7Jsg8Ft8pnPutT","name":"conference-registration","framework":null},"public":false,"readyState":"INITIALIZING","regions":["iad1"],"source":"cli","status":"INITIALIZING","target":"production","team":{"id":"team_d5ajV5G5JfSz9u8IkbJdG1M3","name":"Wesley Otieno's projects","slug":"wesley-otienos-projects"},"type":"LAMBDAS","url":"conference-registration-579vzincx-wesley-otienos-projects.vercel.app","version":2,"previewCommentsEnabled":true,"oidcTokenClaims":{"sub":"owner:wesley-otienos-projects:project:conference-registration:environment:production","iss":"https://oidc.vercel.com/wesley-otienos-projects","scope":"owner:wesley-otienos-projects:project:conference-registration:environment:production","aud":"https://vercel.com/wesley-otienos-projects","owner":"wesley-otienos-projects","owner_id":"team_d5ajV5G5JfSz9u8IkbJdG1M3","project":"conference-registration","project_id":"prj_eP70WOYup66OJN7Jsg8Ft8pnPutT","environment":"production","plan":"hobby"},"lambdas":[{"id":"bld_cgrx0a2am","createdAt":1787995032451,"entrypoint":".","readyState":"READY","readyStateAt":1787995032451,"output":[]}],"aliasAssignedAt":null,"build":{"env":[]},"builds":[],"createdIn":"sfo1","env":[],"functions":null,"inspectorUrl":"https://vercel.com/wesley-otienos-projects/conference-registration/EazrediwcP3pVy1oCpFGvor6wQmG","isInConcurrentBuildsQueue":false,"isInSystemBuildsQueue":true,"ownerId":"team_d5ajV5G5JfSz9u8IkbJdG1M3","plan":"hobby","projectId":"prj_eP70WOYup66OJN7Jsg8Ft8pnPutT","resourceConfig":{"buildMachine":{"defaultPurchaseType":"basic","purchaseType":"basic","machineSelectionType":"fixed"}},"projectSettings":{"buildCommand":null,"devCommand":null,"framework":null,"commandForIgnoringBuildStep":null,"installCommand":null,"outputDirectory":null,"speedInsights":{"id":"zGhRCNICii1U5i2kKHGUqIdg6uA","hasData":false},"webAnalytics":{"id":"YubnB2HSj68P53MY8R2hH9TvG"},"nodeVersion":"24.x"},"routes":null,"config":{"version":1,"secureComputePrimaryRegion":null,"secureComputeFallbackRegion":null,"functionTimeout":300,"functionType":"fluid","functionMemoryType":"standard","isUsingActiveCPU":true,"resourceConfig":{"buildMachine":{"defaultPurchaseType":"basic","purchaseType":"basic","machineSelectionType":"fixed"},"buildQueue":{"configuration":"SKIP_NAMESPACE_QUEUE"}}},"attribution":{"commitMeta":{"name":"AI Bot","email":"bot@example.com","isVerified":false}}}
+[client-debug] 2026-08-29T09:17:14.095Z Deployment created
+[client-debug] 2026-08-29T09:17:14.095Z Yielding a 'created' event
+  Inspect         https://vercel.com/wesley-otienos-projects/conference-registration/EazrediwcP3pVy1oCpFGvor6wQmG
+  Production      https://conference-registration-579vzincx-wesley-otienos-projects.vercel.app
+https://conference-registration-579vzincx-wesley-otienos-projects.vercel.app> [debug] [2026-08-29T09:17:14.097Z] Spinner invoked (Building…) with a 0ms delay
+> [debug] [2026-08-29T09:17:14.098Z] #2 → GET https://api.vercel.com/v3/now/deployments/dpl_EazrediwcP3pVy1oCpFGvor6wQmG/events?direction=forward&follow=1&format=lines&teamId=team_d5ajV5G5JfSz9u8IkbJdG1M3
+[client-debug] 2026-08-29T09:17:14.098Z Waiting for deployment to be ready...
+[client-debug] 2026-08-29T09:17:14.099Z Waiting for builds and the deployment to complete...
+[client-debug] 2026-08-29T09:17:16.232Z Deployment state changed to BUILDING
+[client-debug] 2026-08-29T09:17:16.232Z Yielding a 'building' event
+> [debug] [2026-08-29T09:17:16.232Z] Spinner invoked (Building…) with a 0ms delay
+> [debug] [2026-08-29T09:17:17.574Z] #2 ← 200 OK: sfo1::5f7bn-1787995033409-387dc89529cf [3.48s]
+> [debug] [2026-08-29T09:17:17.581Z] Spinner invoked (Running build in Washington, D.C., USA (East) – iad1) with a 0ms delay
+> [debug] [2026-08-29T09:17:17.581Z] Spinner invoked (Build machine configuration: 2 cores, 8 GB) with a 0ms delay
+> [debug] [2026-08-29T09:17:17.581Z] Spinner invoked (Retrieving list of deployment files...) with a 0ms delay
+> [debug] [2026-08-29T09:17:17.581Z] Spinner invoked (Downloading 60 deployment files...) with a 0ms delay
+> [debug] [2026-08-29T09:17:18.612Z] Spinner invoked (Restored build cache from previous deployment (4jcNk9KyyxN5Z3XqTQC39HTEo3x9)) with a 0ms delay
+> [debug] [2026-08-29T09:17:18.612Z] Spinner invoked (Running "vercel build") with a 0ms delay
+> [debug] [2026-08-29T09:17:18.612Z] Spinner invoked (Vercel CLI 59.3.0) with a 0ms delay
+> [debug] [2026-08-29T09:17:19.647Z] Spinner invoked (Installing dependencies...) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.685Z] Spinner invoked (> nazarene-conference@0.1.0 postinstall) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.686Z] Spinner invoked (> prisma generate) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.686Z] Spinner invoked (Environment variables loaded from .env) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.686Z] Spinner invoked (Prisma schema loaded from prisma/schema.prisma) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.686Z] Spinner invoked (✔ Generated Prisma Client (v5.22.0) to ./node_modules/@prisma/client in 65ms) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.686Z] Spinner invoked (Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.687Z] Spinner invoked (Tip: Easily identify and fix slow SQL queries in your app. Optimize helps you enhance your visibility: https://pris.ly/--optimize) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.688Z] Spinner invoked (up to date in 2s) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.688Z] Spinner invoked (153 packages are looking for funding) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.688Z] Spinner invoked (run `npm fund` for details) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.688Z] Spinner invoked (npm warn allow-scripts 4 packages have install scripts not yet covered by allowScripts:) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.688Z] Spinner invoked (npm warn allow-scripts   @prisma/client@5.22.0 (postinstall: node scripts/postinstall.js)) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.688Z] Spinner invoked (npm warn allow-scripts   @prisma/engines@5.22.0 (postinstall: node scripts/postinstall.js)) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.689Z] Spinner invoked (npm warn allow-scripts   prisma@5.22.0 (preinstall: node scripts/preinstall-entry.js)) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.689Z] Spinner invoked (npm warn allow-scripts   unrs-resolver@1.12.2 (postinstall: node postinstall.js)) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.689Z] Spinner invoked (npm warn allow-scripts) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.689Z] Spinner invoked (npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.689Z] Spinner invoked (Running "npm run build") with a 0ms delay
+> [debug] [2026-08-29T09:17:20.690Z] Spinner invoked (> nazarene-conference@0.1.0 build) with a 0ms delay
+> [debug] [2026-08-29T09:17:20.690Z] Spinner invoked (> next build) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.720Z] Spinner invoked (▲ Next.js 16.3.3 (Turbopack)) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.720Z] Spinner invoked (- Environments: .env) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.720Z] Spinner invoked (✓ Running next.config.ts took 162ms) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.720Z] Spinner invoked (Attention: Next.js now collects completely anonymous telemetry regarding usage.) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.721Z] Spinner invoked (This information is used to shape Next.js' roadmap and prioritize features.) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.721Z] Spinner invoked (You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.721Z] Spinner invoked (https://nextjs.org/telemetry) with a 0ms delay
+> [debug] [2026-08-29T09:17:21.721Z] Spinner invoked (Creating an optimized production build ...) with a 0ms delay
+> [debug] [2026-08-29T09:17:29.990Z] Spinner invoked (✓ Compiled successfully in 6.8s) with a 0ms delay
+> [debug] [2026-08-29T09:17:29.991Z] Spinner invoked (Running TypeScript ...) with a 0ms delay
+> [debug] [2026-08-29T09:17:32.058Z] Spinner invoked (src/app/api/auth/[...nextauth]/route.ts(6,3): error TS2353: Object literal may only specify known properties, and 'trustHost' does not exist in type 'AuthOptions'.) with a 0ms delay
+> [debug] [2026-08-29T09:17:32.059Z] Spinner invoked (Failed to type check.) with a 0ms delay
+> [debug] [2026-08-29T09:17:32.059Z] Spinner invoked (Error: Command "npm run build" exited with 1) with a 0ms delay
+[client-debug] 2026-08-29T09:17:35.486Z Yielding a 'error' event
+> [debug] [2026-08-29T09:17:35.498Z] Error: Error: Command "npm run build" exited with 1
+Error: Command "npm run build" exited with 1
+    at Now.handleDeploymentError (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-LCDVMLKI.js:1675:12)
+    at processDeployment (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-LCDVMLKI.js:1428:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Now.create (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-LCDVMLKI.js:1566:24)
+    at async createDeploy (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:216:12)
+    at async handleDefaultDeploy (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:1981:18)
+    at async _Span.trace (C:\Users\wotie\AppData\Local\npm-cache\_npx\69f9afb961c37556\node_modules\@vercel\build-utils\dist\index.js:39428:14)
+    at async main (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:2354:18)
+> [debug] [2026-08-29T09:17:35.499Z] handling error: Error: Command "npm run build" exited with 1
+    at Now.handleDeploymentError (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-LCDVMLKI.js:1675:12)
+    at processDeployment (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-LCDVMLKI.js:1428:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async Now.create (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/chunks/chunk-LCDVMLKI.js:1566:24)
+    at async createDeploy (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:216:12)
+    at async handleDefaultDeploy (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/commands/deploy/index.js:1981:18)
+    at async _Span.trace (C:\Users\wotie\AppData\Local\npm-cache\_npx\69f9afb961c37556\node_modules\@vercel\build-utils\dist\index.js:39428:14)
+    at async main (file:///C:/Users/wotie/AppData/Local/npm-cache/_npx/69f9afb961c37556/node_modules/vercel/dist/index.js:2354:18)
+Error: Command "npm run build" exited with 1
+> [debug] [2026-08-29T09:17:36.142Z] Vercel CLI 59.10.0 (Node.js 24.19.0)
+
+> [debug] [2026-08-29T09:17:37.570Z] Telemetry event tracked
+> [debug] [2026-08-29T09:17:37.570Z] Telemetry subprocess killed due to timeout
+> [debug] [2026-08-29T09:17:37.587Z] Telemetry subprocess exited with code null

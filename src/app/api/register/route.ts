@@ -5,8 +5,8 @@ export async function POST(req: Request) {
   try {
     const data = await req.json();
     
-    // Total amount depends on the package (Extra T-Shirts are paid on site)
-    const totalAmount = data.registrationType === 'Full Board' ? 5850 : 3100;
+    // Package amount (500 KES confirmation fee is standalone and not deducted from this)
+    const packageAmount = data.registrationType === 'Full Board' ? 5350 : 2600;
     
     const registrant = await prisma.registrant.create({
       data: {
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
         tShirtSize: data.tShirtSize,
         extraTShirt: data.extraTShirt,
         extraTShirtSize: data.extraTShirtSize || null,
-        balanceAmount: totalAmount - 500,
+        balanceAmount: packageAmount,
         status: "PENDING"
       }
     });

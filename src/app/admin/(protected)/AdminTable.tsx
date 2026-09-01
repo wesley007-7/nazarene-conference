@@ -248,8 +248,8 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Registration Type</label>
                   <select required value={formData.registrationType} onChange={(e) => setFormData({...formData, registrationType: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black">
-                    <option value="Full Board">Full Board (5850 KES)</option>
-                    <option value="Day Scholar">Day Scholar (3100 KES)</option>
+                    <option value="Full Board">Full Board (5350 KES)</option>
+                    <option value="Day Scholar">Day Scholar (2600 KES)</option>
                   </select>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
