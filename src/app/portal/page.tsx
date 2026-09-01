@@ -112,7 +112,7 @@ export default function PortalPage() {
                   <div className="bg-white rounded-xl p-5 shadow-sm border border-blue-100">
                     <ol className="list-decimal list-inside space-y-2 text-sm text-zinc-700">
                       <li>Go to <strong>M-PESA Menu</strong> &gt; <strong>Lipa na M-PESA</strong> &gt; <strong>Pochi la Biashara</strong></li>
-                      <li>Enter Phone: <strong className="text-blue-700 text-base">0721441269</strong></li>
+                      <li>Enter Phone: <strong className="text-blue-700 text-base">0723552949</strong></li>
                       <li>Enter Amount: <strong>(Any amount you choose)</strong></li>
                       <li>Enter your M-PESA PIN</li>
                     </ol>

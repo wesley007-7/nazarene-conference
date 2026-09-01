@@ -255,7 +255,7 @@ export default function Home() {
                         <li>Go to M-PESA Menu</li>
                         <li>Select <strong>Lipa na M-PESA</strong></li>
                         <li>Select <strong>Pochi la Biashara</strong></li>
-                        <li>Enter Phone Number: <strong className="text-green-700 text-lg">0721441269</strong></li>
+                        <li>Enter Phone Number: <strong className="text-green-700 text-lg">0723552949</strong></li>
                         <li>Enter Amount: <strong className="text-green-700 text-lg">500</strong></li>
                         <li>Enter your M-PESA PIN</li>
                       </ol>
@@ -282,6 +282,16 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      <footer className="bg-zinc-950 text-zinc-500 py-8 border-t border-zinc-900 text-center">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-4">
+          <p className="text-sm">© {new Date().getFullYear()} Church of the Nazarene. All rights reserved.</p>
+          <Link href="/admin/login" className="text-xs text-zinc-600 hover:text-zinc-300 transition-colors flex items-center gap-1">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            Admin Panel Login
+          </Link>
+        </div>
+      </footer>
     </div>
   )
 }
