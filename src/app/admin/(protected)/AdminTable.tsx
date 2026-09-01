@@ -94,9 +94,30 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
   );
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden">
-      <div className="px-6 py-4 border-b flex flex-col md:flex-row md:justify-between items-start md:items-center bg-gray-50 gap-4">
-        <h2 className="text-lg font-medium text-gray-900">Registrants</h2>
+    <div className="space-y-6">
+      {/* SMS Warning Banner */}
+      <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-md shadow-sm">
+        <div className="flex">
+          <div className="flex-shrink-0">
+            <svg className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <div className="ml-3">
+            <h3 className="text-sm font-medium text-amber-800">SMS Sending Restrictions (IMPORTANT)</h3>
+            <div className="mt-2 text-sm text-amber-700">
+              <p>
+                Because our SMS account uses a default sender ID, Kenyan regulations block all text messages from going out at night. 
+                <strong> SMS confirmations will ONLY be delivered between 8:00 AM and 6:00 PM.</strong> Approving payments outside these hours will result in failed receipts. Please process your approvals during daytime hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="px-6 py-4 border-b flex flex-col md:flex-row md:justify-between items-start md:items-center bg-gray-50 gap-4">
+          <h2 className="text-lg font-medium text-gray-900">Registrants</h2>
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
           <select 
             value={filter} 
@@ -316,6 +337,7 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
