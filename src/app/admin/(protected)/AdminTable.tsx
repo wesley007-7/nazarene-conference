@@ -61,31 +61,6 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to completely delete this registration? This action cannot be undone.")) return;
-    
-    setLoadingId(id);
-    try {
-      const res = await fetch('/api/admin/delete', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
-      });
-      
-      if (res.ok) {
-        router.refresh();
-      } else {
-        const errorData = await res.json();
-        alert(errorData.error || "Failed to delete.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while deleting.");
-    } finally {
-      setLoadingId(null);
-    }
-  };
-
   const handleAddSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -208,13 +183,6 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                         {loadingId === r.id ? "Recording..." : "Record Payment"}
                       </button>
                     )}
-                    <button
-                      onClick={() => handleDelete(r.id)}
-                      disabled={loadingId === r.id}
-                      className="bg-red-50 text-red-600 hover:bg-red-100 font-bold py-2 px-3 rounded shadow-sm border border-red-200 transition-colors disabled:opacity-50"
-                    >
-                      Delete
-                    </button>
                   </div>
                 </td>
               </tr>
@@ -274,13 +242,6 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                   {loadingId === r.id ? "Recording..." : "Record Payment"}
                 </button>
               )}
-              <button
-                onClick={() => handleDelete(r.id)}
-                disabled={loadingId === r.id}
-                className="bg-red-50 text-red-600 hover:bg-red-100 font-bold py-2 px-3 rounded shadow-sm border border-red-200 transition-colors disabled:opacity-50 text-sm"
-              >
-                Delete
-              </button>
             </div>
           </div>
         ))}
