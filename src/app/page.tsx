@@ -33,6 +33,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [step, setStep] = useState<1 | 2>(1)
   const [formData, setFormData] = useState<FormData | null>(null)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const router = useRouter()
   
   const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
@@ -99,12 +100,37 @@ export default function Home() {
           <div className="brand flex items-center" aria-label="Church of the Nazarene Men's Conference">
             <img className="h-12 w-auto transition-transform hover:scale-105 duration-300" src="/logo.png" alt="Church of the Nazarene logo" />
           </div>
+          
+          {/* Desktop Nav */}
           <nav className="hidden md:flex gap-6">
             <a href="#registration" className="font-medium text-zinc-600 hover:text-zinc-950 transition-colors">Register</a>
             <Link href="/portal" className="font-medium text-zinc-600 hover:text-zinc-950 transition-colors">Check Balance</Link>
             <Link href="/admin/login" className="font-medium text-zinc-600 hover:text-zinc-950 transition-colors">Admin</Link>
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden p-2 text-zinc-600 focus:outline-none" 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Nav Dropdown */}
+        {isMobileMenuOpen && (
+          <nav className="md:hidden bg-white border-t border-zinc-100 px-4 pt-2 pb-4 space-y-1 shadow-lg animate-fade-in-up">
+            <a href="#registration" onClick={() => setIsMobileMenuOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-zinc-900 hover:bg-zinc-50">Register</a>
+            <Link href="/portal" className="block px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-zinc-900 hover:bg-zinc-50">Check Balance</Link>
+            <Link href="/admin/login" className="block px-3 py-2 rounded-md text-base font-medium text-zinc-700 hover:text-zinc-900 hover:bg-zinc-50">Admin</Link>
+          </nav>
+        )}
       </header>
 
       <main>
