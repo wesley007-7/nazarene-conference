@@ -107,7 +107,7 @@ export default function PortalPage() {
               {registrant.status === 'CONFIRMED' && (
                 <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 text-blue-900">
                   <h4 className="font-bold text-lg mb-3">Make an Installment Payment</h4>
-                  <p className="text-sm mb-6">You can pay off your balance in installments of your own choosing. Send any amount you wish to our M-PESA account and our treasurer will update your balance.</p>
+                  <p className="text-sm mb-6">You can pay off your balance in installments of your own choosing. Send any amount you wish to our M-PESA account and our treasurer will update your balance. <strong className="text-red-600 block mt-2">Note: All balances must be cleared by 15th November.</strong></p>
                   
                   <div className="bg-white rounded-xl p-5 shadow-sm border border-blue-100">
                     <ol className="list-decimal list-inside space-y-2 text-sm text-zinc-700">

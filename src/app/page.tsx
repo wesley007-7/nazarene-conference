@@ -140,7 +140,8 @@ export default function Home() {
                     <strong className="text-white text-lg">KSh 500</strong>
                   </div>
                   <p className="text-xs text-zinc-400 leading-relaxed">
-                    * The KSh 500 confirmation fee is a standalone payment required today to secure your spot. This amount is <strong>NOT</strong> deducted from your package cost above.
+                    * The KSh 500 confirmation fee is a standalone payment required today to secure your spot. This amount is <strong>NOT</strong> deducted from your package cost above.<br/>
+                    <span className="text-red-400 font-semibold">* The remaining participation fee balance must be cleared by 15th November.</span>
                   </p>
                 </li>
               </ul>
@@ -244,7 +245,10 @@ export default function Home() {
                     <h3 className="text-2xl font-bold text-green-900 mb-2">Confirmation Required</h3>
                     <p className="text-green-800 mb-2 text-lg">Package Price: <strong>KSh {totalAmount.toLocaleString()}</strong></p>
                     <p className="text-green-800 mb-2 text-lg">Confirmation Fee Due Now: <strong className="text-xl">KSh 500</strong></p>
-                    <p className="text-green-700 mb-8 text-sm">Balance of KSh {totalAmount.toLocaleString()} to be paid later.</p>
+                    <p className="text-green-700 mb-8 text-sm">
+                      Balance of KSh {totalAmount.toLocaleString()} to be paid later. 
+                      <strong className="block mt-1 text-red-600">Please note: All balances must be cleared by 15th November.</strong>
+                    </p>
                     
                     <div className="bg-white rounded-xl p-6 shadow-sm border border-green-100 text-left max-w-lg mx-auto mb-8">
                       <h4 className="font-bold text-zinc-900 mb-4 flex items-center gap-2">
