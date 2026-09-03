@@ -16,7 +16,6 @@ export async function POST(req: Request) {
     }
 
     let attendeeMsg = '';
-    let adminMsg = '';
 
     if (type === 'confirmation') {
       await prisma.registrant.update({
@@ -24,7 +23,6 @@ export async function POST(req: Request) {
         data: { status: 'CONFIRMED' }
       });
       attendeeMsg = `Hi ${registrant.fullName}, your confirmation fee of KES 500 has been received. Your balance is KES ${registrant.balanceAmount.toLocaleString()}. Your registration is confirmed!`;
-      adminMsg = `CONFIRMED: ${registrant.fullName} (${registrant.phoneNumber}) paid 500 KES confirmation. Balance: ${registrant.balanceAmount}.`;
     } else if (type === 'installment') {
       const parsedAmount = parseInt(amount, 10);
       
@@ -45,23 +43,12 @@ export async function POST(req: Request) {
       });
       
       attendeeMsg = `Hi ${registrant.fullName}, we received your installment of KES ${parsedAmount.toLocaleString()}. ${isFullyPaid ? 'You are fully paid for the conference!' : `Your new balance is KES ${safeBalance.toLocaleString()}.`}`;
-      adminMsg = `PAYMENT: ${registrant.fullName} (${registrant.phoneNumber}) paid KES ${parsedAmount.toLocaleString()}. ${isFullyPaid ? 'Fully Paid.' : `New Balance: ${safeBalance.toLocaleString()}`}`;
     } else {
       return NextResponse.json({ message: 'Invalid approval type' }, { status: 400 });
     }
 
-    const treasurerPhone = process.env.TREASURER_PHONE || '0721441269';
-    const secondAdminPhone = process.env.SECOND_ADMIN_PHONE;
-    const thirdAdminPhone = process.env.THIRD_ADMIN_PHONE;
-
-    const adminPhones = [treasurerPhone];
-    if (secondAdminPhone) adminPhones.push(secondAdminPhone);
-    if (thirdAdminPhone) adminPhones.push(thirdAdminPhone);
-
     // Send to attendee
     await sendSMS([registrant.phoneNumber], attendeeMsg);
-    // Send to admins
-    await sendSMS(adminPhones, adminMsg);
 
     return NextResponse.json({ success: true, message: 'Approved and SMS sent.' });
 
