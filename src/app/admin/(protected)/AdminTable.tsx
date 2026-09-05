@@ -311,7 +311,7 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                   <label className="block text-sm font-medium text-gray-700">Extra T-Shirt?</label>
                   <div className="mt-2">
                     <input type="checkbox" checked={formData.extraTShirt} onChange={(e) => setFormData({...formData, extraTShirt: e.target.checked})} className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                    <span className="ml-2 text-sm text-gray-600">Yes (+600 KES)</span>
+                    <span className="ml-2 text-sm text-gray-600">Yes (+700 KES)</span>
                   </div>
                 </div>
               </div>
