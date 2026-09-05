@@ -271,12 +271,9 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
     </div> {/* Closes bg-white rounded-lg shadow overflow-hidden */}
 
     {isAddModalOpen && (
-      <div className="fixed inset-0 z-50 overflow-y-auto">
-        <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
-          <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={() => setIsAddModalOpen(false)}></div>
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-          <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 text-black">
-            <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">Add Manual Registration</h3>
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-gray-500 bg-opacity-75 overflow-y-auto" onClick={() => setIsAddModalOpen(false)}>
+        <div className="relative w-full max-w-lg bg-white rounded-lg shadow-xl p-6 text-black my-8" onClick={(e) => e.stopPropagation()}>
+          <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">Add Manual Registration</h3>
             <form onSubmit={handleAddSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Full Name</label>
@@ -335,7 +332,6 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
                 </button>
               </div>
             </form>
-          </div>
         </div>
       </div>
     )}
