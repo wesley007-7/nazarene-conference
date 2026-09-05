@@ -265,6 +265,7 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
               )}
             </div>
           </div>
+        ))}
       </div> {/* Closes mobile layout */}
       
     </div> {/* Closes bg-white rounded-lg shadow overflow-hidden */}
