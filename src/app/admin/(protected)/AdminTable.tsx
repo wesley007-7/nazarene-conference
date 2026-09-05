@@ -265,80 +265,80 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
               )}
             </div>
           </div>
-        ))}
-      </div>
+      </div> {/* Closes mobile layout */}
+      
+    </div> {/* Closes bg-white rounded-lg shadow overflow-hidden */}
 
-      {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
-            <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={() => setIsAddModalOpen(false)}></div>
-            <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-            <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 text-black">
-              <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">Add Manual Registration</h3>
-              <form onSubmit={handleAddSubmit} className="space-y-4">
+    {isAddModalOpen && (
+      <div className="fixed inset-0 z-50 overflow-y-auto">
+        <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+          <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onClick={() => setIsAddModalOpen(false)}></div>
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+          <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6 text-black">
+            <h3 className="text-lg font-medium leading-6 text-gray-900 mb-4">Add Manual Registration</h3>
+            <form onSubmit={handleAddSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                <input required type="text" value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                  <input required type="text" value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">District</label>
-                    <input required type="text" value={formData.district} onChange={(e) => setFormData({...formData, district: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Local Church</label>
-                    <input required type="text" value={formData.localChurch} onChange={(e) => setFormData({...formData, localChurch: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
-                  </div>
+                  <label className="block text-sm font-medium text-gray-700">District</label>
+                  <input required type="text" value={formData.district} onChange={(e) => setFormData({...formData, district: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Phone Number (M-PESA)</label>
-                  <input required type="text" value={formData.phoneNumber} onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})} placeholder="e.g. 07..." className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
+                  <label className="block text-sm font-medium text-gray-700">Local Church</label>
+                  <input required type="text" value={formData.localChurch} onChange={(e) => setFormData({...formData, localChurch: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
                 </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Phone Number (M-PESA)</label>
+                <input required type="text" value={formData.phoneNumber} onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})} placeholder="e.g. 07..." className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Registration Type</label>
+                <select required value={formData.registrationType} onChange={(e) => setFormData({...formData, registrationType: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black">
+                  <option value="Full Board">Full Board (5350 KES)</option>
+                  <option value="Day Scholar">Day Scholar (2600 KES)</option>
+                </select>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Registration Type</label>
-                  <select required value={formData.registrationType} onChange={(e) => setFormData({...formData, registrationType: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black">
-                    <option value="Full Board">Full Board (5350 KES)</option>
-                    <option value="Day Scholar">Day Scholar (2600 KES)</option>
+                  <label className="block text-sm font-medium text-gray-700">T-Shirt Size</label>
+                  <select required value={formData.tShirtSize} onChange={(e) => setFormData({...formData, tShirtSize: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black">
+                    <option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
                   </select>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">T-Shirt Size</label>
-                    <select required value={formData.tShirtSize} onChange={(e) => setFormData({...formData, tShirtSize: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black">
-                      <option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Extra T-Shirt?</label>
-                    <div className="mt-2">
-                      <input type="checkbox" checked={formData.extraTShirt} onChange={(e) => setFormData({...formData, extraTShirt: e.target.checked})} className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                      <span className="ml-2 text-sm text-gray-600">Yes (+600 KES)</span>
-                    </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Extra T-Shirt?</label>
+                  <div className="mt-2">
+                    <input type="checkbox" checked={formData.extraTShirt} onChange={(e) => setFormData({...formData, extraTShirt: e.target.checked})} className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+                    <span className="ml-2 text-sm text-gray-600">Yes (+600 KES)</span>
                   </div>
                 </div>
-                {formData.extraTShirt && (
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">Extra T-Shirt Size</label>
-                    <select required value={formData.extraTShirtSize} onChange={(e) => setFormData({...formData, extraTShirtSize: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black">
-                      <option value="">Select Size</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
-                    </select>
-                  </div>
-                )}
-                <div className="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse">
-                  <button type="submit" disabled={isSubmitting} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50">
-                    {isSubmitting ? "Adding..." : "Add Registrant"}
-                  </button>
-                  <button type="button" onClick={() => setIsAddModalOpen(false)} disabled={isSubmitting} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm">
-                    Cancel
-                  </button>
+              </div>
+              {formData.extraTShirt && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Extra T-Shirt Size</label>
+                  <select required value={formData.extraTShirtSize} onChange={(e) => setFormData({...formData, extraTShirtSize: e.target.value})} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm border p-2 text-black">
+                    <option value="">Select Size</option><option value="S">S</option><option value="M">M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
+                  </select>
                 </div>
-              </form>
-            </div>
+              )}
+              <div className="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse">
+                <button type="submit" disabled={isSubmitting} className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50">
+                  {isSubmitting ? "Adding..." : "Add Registrant"}
+                </button>
+                <button type="button" onClick={() => setIsAddModalOpen(false)} disabled={isSubmitting} className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm">
+                  Cancel
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      )}
-    </div>
-    </div>
+      </div>
+    )}
+  </div>
   );
 }
 

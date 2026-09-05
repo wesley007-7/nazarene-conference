@@ -49,27 +49,23 @@ export default function Home() {
   const totalAmount = watchRegType === 'Full Board' ? 5350 : 2600;
 
   const onProceedToPayment = async (data: FormData) => {
+    setLoading(true);
     setFormData(data);
-    setStep(2);
-  }
-
-  const submitFinalRegistration = async () => {
-    if (!formData) return;
-    setLoading(true)
+    
     try {
-      const formattedPhone = formData.phone.startsWith('+') ? formData.phone : 
-                            formData.phone.startsWith('254') ? `+${formData.phone}` : 
-                            `+254${formData.phone.substring(1)}`
+      const formattedPhone = data.phone.startsWith('+') ? data.phone : 
+                            data.phone.startsWith('254') ? `+${data.phone}` : 
+                            `+254${data.phone.substring(1)}`
 
       const apiPayload = {
-        fullName: formData.fullName,
-        district: formData.district,
-        localChurch: formData.localChurch,
+        fullName: data.fullName,
+        district: data.district,
+        localChurch: data.localChurch,
         phoneNumber: formattedPhone,
-        registrationType: formData.registrationType,
-        tShirtSize: formData.freeTshirtSize,
-        extraTShirt: formData.extraTshirtQuantity > 0,
-        extraTShirtSize: formData.extraTshirtQuantity > 0 ? formData.freeTshirtSize : undefined
+        registrationType: data.registrationType,
+        tShirtSize: data.freeTshirtSize,
+        extraTShirt: data.extraTshirtQuantity > 0,
+        extraTShirtSize: data.extraTshirtQuantity > 0 ? data.freeTshirtSize : undefined
       };
 
       const res = await fetch('/api/register', {
@@ -81,16 +77,22 @@ export default function Home() {
       const result = await res.json()
       
       if (result.success) {
-        router.push('/success')
+        // Data saved successfully, move to step 2 for M-PESA instructions
+        setStep(2);
       } else {
-        alert(result.error || "An error occurred")
+        alert(result.error || "An error occurred");
       }
     } catch (error) {
-      console.error(error)
-      alert("An error occurred during registration")
+      console.error(error);
+      alert("An error occurred during registration");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
+  }
+
+  const submitFinalRegistration = () => {
+    // Already saved to DB in step 1, just go to success page
+    router.push('/success');
   }
 
   return (
@@ -293,17 +295,9 @@ export default function Home() {
 
                     <button 
                       onClick={submitFinalRegistration} 
-                      disabled={loading}
-                      className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 disabled:opacity-70 flex items-center justify-center w-full max-w-lg mx-auto shadow-lg shadow-green-900/20 hover:shadow-xl hover:-translate-y-1"
+                      className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center w-full max-w-lg mx-auto shadow-lg shadow-green-900/20 hover:shadow-xl hover:-translate-y-1"
                     >
-                      {loading ? "Processing..." : "I Have Sent the Payment"}
-                    </button>
-
-                    <button 
-                      onClick={() => setStep(1)} 
-                      className="mt-4 text-zinc-500 hover:text-zinc-800 text-sm font-medium transition-colors"
-                    >
-                      ← Back to edit details
+                      I Have Sent the Payment
                     </button>
                   </div>
                 </div>
