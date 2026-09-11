@@ -262,8 +262,8 @@ export default function Home() {
                   </div>
 
                   <div className="mt-12 flex justify-end">
-                    <button type="submit" className="bg-zinc-900 hover:bg-black text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center min-w-[200px] shadow-lg shadow-zinc-900/20 hover:shadow-xl hover:shadow-zinc-900/30 hover:-translate-y-1">
-                      Proceed to Pay KSh 500
+                    <button type="submit" disabled={loading} className={`bg-zinc-900 hover:bg-black text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center min-w-[200px] shadow-lg shadow-zinc-900/20 ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl hover:shadow-zinc-900/30 hover:-translate-y-1'}`}>
+                      {loading ? 'Processing...' : 'Proceed to Pay KSh 500'}
                     </button>
                   </div>
                 </form>
