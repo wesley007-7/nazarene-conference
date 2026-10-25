@@ -1,23 +1,25 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-export default function PortalPage() {
+function PortalContent() {
+  const searchParams = useSearchParams();
   const [phone, setPhone] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [registrant, setRegistrant] = useState<any>(null);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const fetchRegistrant = async (searchPhone: string) => {
+    if (!searchPhone.trim()) return;
     setLoading(true);
     setError('');
     setRegistrant(null);
 
     try {
-      const res = await fetch(`/api/portal?phone=${encodeURIComponent(phone)}`);
+      const res = await fetch(`/api/portal?phone=${encodeURIComponent(searchPhone.trim())}`);
       const data = await res.json();
 
       if (res.ok) {
@@ -30,6 +32,19 @@ export default function PortalPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    const urlPhone = searchParams.get('phone');
+    if (urlPhone) {
+      setPhone(urlPhone);
+      fetchRegistrant(urlPhone);
+    }
+  }, [searchParams]);
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault();
+    fetchRegistrant(phone);
   };
 
   return (
@@ -146,3 +161,14 @@ export default function PortalPage() {
   );
 }
 
+export default function PortalPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-zinc-50 flex items-center justify-center">
+        <p className="text-zinc-500 font-medium">Loading portal...</p>
+      </div>
+    }>
+      <PortalContent />
+    </Suspense>
+  );
+}

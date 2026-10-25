@@ -79,7 +79,7 @@ export default function AdminTable({ initialRegistrants }: { initialRegistrants:
         router.refresh();
       } else {
         const errorData = await res.json();
-        alert(errorData.error || "Failed to add registrant.");
+        alert(errorData.error || errorData.message || "Failed to add registrant.");
       }
     } catch (error) {
       console.error(error);

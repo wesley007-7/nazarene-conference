@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getPhoneVariants } from '@/lib/phone';
 
 export async function GET(req: Request) {
   try {
@@ -10,18 +11,12 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: 'Phone number is required' }, { status: 400 });
     }
 
-    // Format phone number to match how it's saved in the DB
-    let formattedPhone = phone.trim();
-    if (formattedPhone.startsWith('0')) {
-      formattedPhone = '+254' + formattedPhone.substring(1);
-    } else if (formattedPhone.startsWith('254')) {
-      formattedPhone = '+' + formattedPhone;
-    } else if (!formattedPhone.startsWith('+')) {
-      formattedPhone = '+254' + formattedPhone;
-    }
+    const variants = getPhoneVariants(phone);
 
     const registrant = await prisma.registrant.findFirst({
-      where: { phoneNumber: formattedPhone },
+      where: {
+        phoneNumber: { in: variants }
+      },
       orderBy: { createdAt: 'desc' }
     });
 
@@ -36,4 +31,3 @@ export async function GET(req: Request) {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
-

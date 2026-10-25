@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { normalizePhone } from '@/lib/phone'
 
 const districts = [
   'Kenya Rift Valley',
@@ -34,6 +35,16 @@ export default function Home() {
   const [step, setStep] = useState<1 | 2>(1)
   const [formData, setFormData] = useState<FormData | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [alreadyRegisteredUser, setAlreadyRegisteredUser] = useState<{
+    id: string;
+    fullName: string;
+    district: string;
+    localChurch: string;
+    phoneNumber: string;
+    registrationType: string;
+    status: string;
+    balanceAmount: number;
+  } | null>(null)
   const router = useRouter()
   
   const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
@@ -53,9 +64,7 @@ export default function Home() {
     setFormData(data);
     
     try {
-      const formattedPhone = data.phone.startsWith('+') ? data.phone : 
-                            data.phone.startsWith('254') ? `+${data.phone}` : 
-                            `+254${data.phone.substring(1)}`
+      const formattedPhone = normalizePhone(data.phone);
 
       const apiPayload = {
         fullName: data.fullName,
@@ -79,6 +88,9 @@ export default function Home() {
       if (result.success) {
         // Data saved successfully, move to step 2 for M-PESA instructions
         setStep(2);
+      } else if (result.alreadyRegistered && result.registrant) {
+        // Person already registered! Prompt with their details and link to portal
+        setAlreadyRegisteredUser(result.registrant);
       } else {
         alert(result.error || "An error occurred");
       }
@@ -316,6 +328,120 @@ export default function Home() {
           </Link>
         </div>
       </footer>
+
+      {/* Already Registered Modal Prompt */}
+      {alreadyRegisteredUser && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border border-zinc-100 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start mb-4">
+              <div className="flex items-center gap-3">
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
+                  alreadyRegisteredUser.status === 'FULLY_PAID' ? 'bg-green-100 text-green-700' :
+                  alreadyRegisteredUser.status === 'CONFIRMED' ? 'bg-blue-100 text-blue-700' :
+                  'bg-amber-100 text-amber-700'
+                }`}>
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-zinc-900">
+                    {alreadyRegisteredUser.status === 'FULLY_PAID' ? "Already Fully Paid!" :
+                     alreadyRegisteredUser.status === 'CONFIRMED' ? "Already Registered!" :
+                     "Registration Pending"}
+                  </h3>
+                  <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${
+                    alreadyRegisteredUser.status === 'FULLY_PAID' ? 'bg-green-100 text-green-800' : 
+                    alreadyRegisteredUser.status === 'CONFIRMED' ? 'bg-blue-100 text-blue-800' : 
+                    'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {alreadyRegisteredUser.status.replace('_', ' ')}
+                  </span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setAlreadyRegisteredUser(null)}
+                className="text-zinc-400 hover:text-zinc-600 p-1 rounded-lg"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <p className="text-zinc-600 text-sm">
+                Hi <strong className="text-zinc-900">{alreadyRegisteredUser.fullName}</strong>, our records show you are already registered under phone <strong className="text-zinc-900">{alreadyRegisteredUser.phoneNumber}</strong>.
+              </p>
+
+              <div className="bg-zinc-50 border border-zinc-200 rounded-2xl p-4 text-sm space-y-1">
+                <div className="flex justify-between">
+                  <span className="text-zinc-500">Package:</span>
+                  <span className="font-semibold text-zinc-900">{alreadyRegisteredUser.registrationType}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-500">Church:</span>
+                  <span className="font-semibold text-zinc-900">{alreadyRegisteredUser.localChurch} ({alreadyRegisteredUser.district})</span>
+                </div>
+                <div className="flex justify-between pt-2 border-t border-zinc-200 text-base">
+                  <span className="font-bold text-zinc-700">Remaining Balance:</span>
+                  <span className="font-extrabold text-zinc-950">KSh {alreadyRegisteredUser.balanceAmount.toLocaleString()}</span>
+                </div>
+              </div>
+
+              {alreadyRegisteredUser.status === 'CONFIRMED' && (
+                <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 text-sm text-blue-950 space-y-2">
+                  <p className="font-bold text-blue-900 flex items-center gap-1.5">
+                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Continue Paying Your Balance:
+                  </p>
+                  <p>
+                    You do not need to register again. You can continue paying off your remaining balance in installments via <strong>M-PESA Pochi la Biashara</strong>:
+                  </p>
+                  <div className="bg-white rounded-xl p-3 border border-blue-100 text-xs space-y-1 text-zinc-800">
+                    <p>1. Lipa na M-PESA &gt; <strong>Pochi la Biashara</strong></p>
+                    <p>2. Enter Phone: <strong className="text-blue-700 text-sm">0723552949</strong></p>
+                    <p>3. Enter any installment amount &amp; PIN</p>
+                  </div>
+                  <p className="text-xs text-red-600 font-semibold">
+                    * All participation balances must be cleared by 15th November.
+                  </p>
+                </div>
+              )}
+
+              {alreadyRegisteredUser.status === 'FULLY_PAID' && (
+                <div className="bg-green-50 border border-green-200 rounded-2xl p-4 text-sm text-green-900">
+                  <p className="font-bold mb-1">All Dues Cleared!</p>
+                  <p className="text-xs text-green-800">You have zero remaining balance and your registration is 100% complete. See you at the conference!</p>
+                </div>
+              )}
+
+              {alreadyRegisteredUser.status === 'PENDING' && (
+                <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-sm text-amber-950 space-y-2">
+                  <p className="font-bold text-amber-900">Confirmation Fee Verification Pending</p>
+                  <p className="text-xs text-amber-800">
+                    We already received your registration! If you haven&apos;t sent the KSh 500 confirmation fee yet, send it to Pochi la Biashara <strong>0723552949</strong>. If you already sent it, our team will confirm your spot shortly.
+                  </p>
+                </div>
+              )}
+
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <Link
+                  href={`/portal?phone=${encodeURIComponent(alreadyRegisteredUser.phoneNumber)}`}
+                  className="flex-1 bg-zinc-900 hover:bg-black text-white py-3 px-4 rounded-xl font-bold text-center text-sm transition-all shadow-md flex items-center justify-center gap-2"
+                >
+                  Go to Portal &amp; Pay Remaining Fee &rarr;
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setAlreadyRegisteredUser(null)}
+                  className="py-3 px-4 rounded-xl font-semibold text-zinc-600 hover:bg-zinc-100 text-sm transition-all"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
