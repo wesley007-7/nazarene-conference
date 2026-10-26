@@ -369,7 +369,7 @@ export default function Home() {
 
             <div className="space-y-4">
               <p className="text-zinc-600 text-sm">
-                Hi <strong className="text-zinc-900">{alreadyRegisteredUser.fullName}</strong>, our records show you are already registered under phone <strong className="text-zinc-900">{alreadyRegisteredUser.phoneNumber}</strong>.
+                Hi <strong className="text-zinc-900">{alreadyRegisteredUser.fullName}</strong>, our records show a registration already exists under this name / phone (<strong className="text-zinc-900">{alreadyRegisteredUser.phoneNumber}</strong>).
               </p>
 
               <div className="bg-zinc-50 border border-zinc-200 rounded-2xl p-4 text-sm space-y-1">
